@@ -136,16 +136,17 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* vmax = o maior entre largura e altura da tela. Usando vmax nos
-       dois eixos, o quadrado garantidamente cobre a tela inteira, não
-       importa o quão "esticada" a tela seja — era esse o bug: em
-       200vh, telas de paisagem mais largas que o dobro da própria
-       altura ficavam sem cobertura nas laterais (a vinheta virava um
-       quadrado com furo, "vazando" a lâmina nas bordas). */
-    width: 260vmax;
-    height: 260vmax;
-    margin-left: -130vmax;
-    margin-top: -130vmax;
+    /* vmax = o maior entre largura e altura da tela — garante cobertura
+       em qualquer proporção de tela. O tamanho tem uma folga extra
+       (50% a mais do que o mínimo teórico) porque, no pior caso —
+       inclinação máxima bem na diagonal, com o círculo já encolhido
+       ao mínimo — a margem "justa" ficava perto demais do limite em
+       telas menos alongadas (tablets/foldables em paisagem, por
+       exemplo), deixando um pequeno vazamento nas bordas. */
+    width: 390vmax;
+    height: 390vmax;
+    margin-left: -195vmax;
+    margin-top: -195vmax;
     pointer-events: none;
     will-change: transform; /* pede ao navegador pra usar uma camada de GPU */
     background: radial-gradient(circle var(--eyepiece-radius) at center,
@@ -155,9 +156,8 @@
       rgba(176,141,87,0.35) calc(var(--eyepiece-radius) - 6px),  /* aro de latão */
       #000 var(--eyepiece-radius)
       /* além do último stop, o CSS já preenche o resto do elemento
-         (até 130vmax de raio) com a mesma cor sólida — por isso o
-         elemento gigante nunca "acaba" antes da borda da tela, mesmo
-         depois de deslocado. */
+         com a mesma cor sólida — por isso o elemento gigante nunca
+         "acaba" antes da borda da tela, mesmo depois de deslocado. */
     );
   }
 
